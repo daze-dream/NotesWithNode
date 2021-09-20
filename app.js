@@ -41,7 +41,7 @@ yargs.command({
     description: 'Removes a note',
     builder: {
         title: {
-            describe: 'Note title',
+            describe: 'Note title you want to remove',
             demandOption: true,
             type: 'string'
         }
