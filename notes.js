@@ -25,7 +25,7 @@ const getNotes = function () {
 const addNote = function(title, body) {
     console.log('Attempting to add note with... \n Title: ' + title + ' \n Body: ' + body);
     const notes = loadNotes();
-    const duplicates = notes.filter((note) => {return note.title === title})
+    const duplicates = notes.filter((note) => {note.title === title;})
     if(duplicates.length === 0) {
         notes.push({
             title: title,
@@ -45,7 +45,7 @@ const addNote = function(title, body) {
 const removeNote = function(title) {
     console.log('Attempting to remove note with \n Title: ' + title + '\n ...');
     const notes = loadNotes();
-    const toKeep = notes.filter( (note) => {return note.title !== title;});
+    const toKeep = notes.filter( (note) => {note.title !== title;});
     if(notes.length === toKeep.length)
         console.log(chalk.black.bgRed('Error') + 'No notes were found that matched the title: ' + title + '. Removal unsuccessful.');
     else
@@ -56,8 +56,27 @@ const removeNote = function(title) {
 
 }
 
+const listNotes = function() {
+    console.log('Attempting to show all notes...')
+    const notes = loadNotes();
+    i = 1;
+    if(notes.length > 0)
+    {
+        notes.forEach( (note) => {
+            console.log(chalk.blue('Note ' + i));
+             console.log(chalk.yellow('  Title: ') + note.title + '\n' + chalk.yellow('  Contents: ') + note.body)
+             i += 1;
+        })
+    }
+    else
+    {
+        console.log('No notes have been added.')
+    }
+}
+
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
+    listNotes:listNotes,
 }
