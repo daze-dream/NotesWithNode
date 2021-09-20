@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "@types/yargs": "^17.0.2",
     "chalk": "^2.4.1",
     "validator": "^13.6.0"
   },
