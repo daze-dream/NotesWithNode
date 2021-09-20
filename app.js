@@ -10,6 +10,8 @@ const chalk = require("chalk")
  * @type {import('yargs').default} yargs
  */
 const yargs = require("yargs")
+const noteUtils = require('./notes.js')
+const { string } = require('yargs')
 //----------------------
 yargs.version('2.1.0')
 //console.log(process.argv)
@@ -31,14 +33,21 @@ yargs.command({
 
     },
     handler:  function(argv) {
-        console.log('Adding note with... \n Title: ' + argv.title + ' \n Body: ' + argv.body)
+        noteUtils.addNote(argv.title, argv.body);
     }
 })
 yargs.command({
     command: 'remove',
     description: 'Removes a note',
-    handler:  function() {
-        console.log('Removing note...')
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler:  function(argv) {
+        noteUtils.removeNote(argv.title);
     }
 })
 yargs.command({
@@ -58,12 +67,3 @@ yargs.command({
 
 yargs.parse()
 //console.log(yargs.argv)
-
-/* const command = process.argv[2];
-
-if(command === 'add'){
-    console.log('Adding note...')
-}
-else if(command === 'remove') {
-    console.log('Removing note...')
-} */
