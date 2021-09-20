@@ -10,11 +10,9 @@ const chalk = require("chalk")
  * @type {import('yargs').default} yargs
  */
 const yargs = require("yargs")
-const { string } = require('yargs')
 //----------------------
 yargs.version('2.1.0')
 //console.log(process.argv)
-
 //add, remove, read, list notes commands
 yargs.command({
     command: 'add',
