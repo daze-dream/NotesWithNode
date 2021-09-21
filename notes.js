@@ -48,9 +48,11 @@ const getOneNote = (title) => {
 const addNote = (title, body) => {
     console.log('Attempting to add note with... \n Title: ' + title + ' \n Body: ' + body);
     const notes = loadNotes();
-    const duplicates = notes.filter((note) => note.title === title);
-    console.log(duplicates);
-    if(duplicates.length === 0) {
+    //const duplicates = notes.filter((note) => note.title === title);
+    // more efficient way to detect - stops right when a duplicate is found instead still searching even after a match
+    const duplicate = notes.find((note) => note.title = title);
+    //console.log(duplicates);
+    if(!duplicate/*duplicates.length === 0*/) {
         notes.push({
             title: title,
             body: body,
