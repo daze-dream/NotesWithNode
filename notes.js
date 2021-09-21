@@ -3,7 +3,7 @@ const fs = require('fs');
 //--------------------------------------------------------
 
 /**utility to get the JSON notes file */
-const loadNotes = function () {
+const loadNotes =() => {
     try{
         return JSON.parse(fs.readFileSync('notes.json').toString())
     }
@@ -13,19 +13,21 @@ const loadNotes = function () {
     }
 }
  /**utility to save changes to the JSON notes file */
-const saveNote = function (notes) {
+const saveNote = (notes) => {
     fs.writeFileSync('notes.json', JSON.stringify(notes))
 }
 
-const getNotes = function () {
+const getOneNote = (title) => {
+    console.log('Fetching note with title ' + title)
     const notes = loadNotes();
 }
 
 /**Adds a note */
-const addNote = function(title, body) {
+const addNote = (title, body) => {
     console.log('Attempting to add note with... \n Title: ' + title + ' \n Body: ' + body);
     const notes = loadNotes();
-    const duplicates = notes.filter((note) => {note.title === title;})
+    const duplicates = notes.filter((note) => note.title === title);
+    console.log(duplicates);
     if(duplicates.length === 0) {
         notes.push({
             title: title,
@@ -36,18 +38,18 @@ const addNote = function(title, body) {
 
     }
     else {
-        console.log(chalk.black.bgRed('Error') +': A note with title'  + title + ' already exists. Cannot create duplicate. \n')
+        console.log(chalk.black.bgRed('Error') +': A note with title '  + title + ' already exists. Cannot create duplicate. \n')
     }
 
     //console.log(notes)
 }
 
-const removeNote = function(title) {
+const removeNote =  (title) => {
     console.log('Attempting to remove note with \n Title: ' + title + '\n ...');
     const notes = loadNotes();
-    const toKeep = notes.filter( (note) => {note.title !== title;});
+    const toKeep = notes.filter( (note) => note.title !== title);
     if(notes.length === toKeep.length)
-        console.log(chalk.black.bgRed('Error') + 'No notes were found that matched the title: ' + title + '. Removal unsuccessful.');
+        console.log(chalk.black.bgRed('Error') + ': No notes were found that matched the title: ' + title + '. Removal unsuccessful.');
     else
     {        
         saveNote(toKeep);
@@ -56,7 +58,7 @@ const removeNote = function(title) {
 
 }
 
-const listNotes = function() {
+const listNotes = () => {
     console.log('Attempting to show all notes...')
     const notes = loadNotes();
     i = 1;
@@ -75,7 +77,7 @@ const listNotes = function() {
 }
 
 module.exports = {
-    getNotes: getNotes,
+    getOneNote: getOneNote,
     addNote: addNote,
     removeNote: removeNote,
     listNotes:listNotes,

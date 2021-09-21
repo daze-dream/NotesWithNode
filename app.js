@@ -46,22 +46,29 @@ yargs.command({
             type: 'string'
         }
     },
-    handler:  function(argv) {
+    handler(argv) {
         noteUtils.removeNote(argv.title);
     }
 })
 yargs.command({
     command: 'list',
     description: 'Shows all notes',
-    handler:  function() {
+    handler() {
         noteUtils.listNotes();
     }
 })
 yargs.command({
     command: 'read',
     description: 'Selects a note to display',
-    handler:  function() {
-        console.log('Showing selected note...')
+    builder: {
+        title: {
+            describe: 'Title of note to retrieve',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+       noteUtils.getOneNote(argv.title);
     }
 })
 
