@@ -18,8 +18,30 @@ const saveNote = (notes) => {
 }
 
 const getOneNote = (title) => {
-    console.log('Fetching note with title ' + title)
+    console.log('Fetching note(s) with title ' + title)
     const notes = loadNotes();
+    const matchingNotes = notes.filter((note) => note.title === title);
+    //console.log(matchingNotes);
+    i = 1;
+    console.log('Found ' + matchingNotes.length + ' notes... ')
+    if(matchingNotes.length > 0)
+    {
+        matchingNotes.forEach((note) =>{
+            console.log(chalk.blue('Note ' + i));
+            console.log(chalk.yellow('  Title: ') + note.title + '\n' + chalk.yellow('  Contents: ') + note.body);
+            i +=1;
+        })
+        if(matchingNotes.length > 1)
+        {
+            console.log(chalk.yellow.inverse('WARNING:') + ' Having notes with duplicate names is not natively supported.' + 
+            '\n The ' + chalk.magenta('remove') +' command will delete both notes. ' + 
+            '\n If added manually, consider changing the name of duplicate notes or deleting them.')
+        }
+    }
+    else {
+        console.log(chalk.red('No notes found with that title. Make sure it is spelled correctly, and that it exists.' +
+        ' Use the ' + chalk.magenta('list') +  ' command to see all notes.'))
+    }
 }
 
 /**Adds a note */
