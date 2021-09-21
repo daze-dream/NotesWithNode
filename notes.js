@@ -84,7 +84,7 @@ const removeNote =  (title) => {
 
 const listNotes = () => {
     console.log('Attempting to show all notes...')
-    const notes = loadNotes();
+    const notes = loadNotes();    
     i = 1;
     if(notes.length > 0)
     {
