@@ -73,4 +73,5 @@ yargs.command({
 })
 
 yargs.parse()
+console.log(chalk.cyan('Welcome to the Notes app. Type the ' +chalk.magenta('--help') +  ' command to get started.'))
 //console.log(yargs.argv)
